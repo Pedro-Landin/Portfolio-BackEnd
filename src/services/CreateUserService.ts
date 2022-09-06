@@ -6,12 +6,14 @@ import { User } from "../entities/User";
 type UserRequest = {
     name: string,
     description: string;
+    interests: string
 }
 
 export class CreateUserService {
     async execute({
         name,
-        description
+        description,
+        interests
     }: UserRequest): Promise<User | Error> {
         const repo = getRepository(User);
         
@@ -22,7 +24,8 @@ export class CreateUserService {
 
         const user = repo.create({
             name,
-            description
+            description,
+            interests
         })
 
         await repo.save(user);
